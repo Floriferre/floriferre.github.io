@@ -15,7 +15,7 @@
   icon: fa-plus-square
   present: true
 
-  - name:
+- name:
     detail: 고려대 디지털 새싹 캠프 주강사
     i18n: Korea_univ
   desc:
