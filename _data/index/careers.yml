@@ -1,17 +1,17 @@
 # careers section data
 # if you don't have language feature(language.yml is empty), ignore "i18n" items
 - name:
-    detail: Company A
-    i18n: company_a
+    detail: ISSLAB
+    i18n: isslab
   desc:
-    detail: I worked at Company A ...
-    i18n: company_a_desc
+    detail: I worked at ISSLAB as a researcher major in Computer Security.
+    i18n: isslab_desc
   date:
-    detail: Apr. 2016
-    i18n: company_a_date
+    detail: Mar. 2021 ~ Feb. 2023
+    i18n: isslab_date
   job:
-    detail: CTO
-    i18n: company_a_job
+    detail: Researcher
+    i18n: isslab_job
   icon: fa-plus-square
   present: true
 
