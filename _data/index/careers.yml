@@ -1,6 +1,36 @@
 # careers section data
 # if you don't have language feature(language.yml is empty), ignore "i18n" items
 - name:
+    detail: SSAFY
+    i18n: ssafy
+  desc:
+    detail: I am studying at SSAFY(SAMSUNG Software Academy For Youth).
+    i18n: ssafy_desc
+  date:
+    detail: Jul. 2023 ~
+    i18n: ssafy_date
+  job:
+    detail: Student
+    i18n: ssafy_job
+  icon: fa-plus-square
+  present: true
+
+  - name:
+    detail: 고려대 디지털 새싹 캠프 주강사
+    i18n: Korea_univ
+  desc:
+    detail: I worked at 고려대 디지털 새싹 캠프 as main tutor.
+    i18n: Korea_univ_desc
+  date:
+    detail: Jan. 2023 ~ Feb. 2023
+    i18n: Korea_univ_date
+  job:
+    detail: Tutor
+    i18n: Korea_univ_job
+  icon: fa-plus-square
+  present: true
+
+- name:
     detail: ISSLAB
     i18n: isslab
   desc:
@@ -16,15 +46,15 @@
   present: true
 
 - name:
-    detail: Company B
-    i18n: company_b
+    detail: AhnLab
+    i18n: ahnlab
   desc:
-    detail: I worked at Company B ...
-    i18n: company_b_desc
+    detail: I worked at AhnLab as an intern
+    i18n: ahnlab_desc
   date:
-    detail: Jun. 2015
-    i18n: company_b_date
+    detail: Jun. 2021 ~ Aug. 2021
+    i18n: ahnlab_date
   job:
-    detail: Full Stack Developer
-    i18n: company_b_job
+    detail: Web Security Researcher (Modbus)
+    i18n: ahnlab_job
   icon: fa-plus-square
