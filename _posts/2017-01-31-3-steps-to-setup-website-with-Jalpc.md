@@ -1,39 +1,177 @@
 ---
 layout: post
-title:  "3 Steps (2 minutes) to Setup Your Personal Website with Jalpc"
-date:   2017-01-31
-desc: "3 Steps (2 minutes) to Setup Your Personal Website with Jalpc"
-keywords: "Jalpc,Jekyll,gh-pages,website,blog,easy"
-categories: [HTML]
-tags: [Jalpc,Jekyll]
+title:  "[백준/1941] 소문난 칠공주"
+date:   2023-10-10
+desc: ""
+keywords: "수학, 그래프이론, 브루트포스, 그래프탐색, BFS, 조합론, 백트래킹"
+categories: [골드3]
+tags: [Java]
 icon: icon-html
 ---
 
-Everyone wants to have a personal website, you can display your infomation to public, post blogs and make friends. If you are CS engineer, haveing a self website will benefit your interview.
+### 문제 링크
+[문제 링크](https://www.acmicpc.net/problem/1941)
 
-So, if you like this website <https://jarrekk.github.io/Jalpc/> or <http://www.jarrekk.com> and are willing to have a website, here is a way to build your website in 3 steps(2 minutes). Following are steps to setup your website(make sure you have basic knowledge of [Jekyll](https://jekyllrb.com/) and [GitHub Pages](https://pages.github.com/), if you want to custom css/js [NPM](https://github.com/npm/npm) is needed):
+---
 
-1. Fork [this project -- Jalpc](https://github.com/jarrekk/Jalpc) at [GitHub](https://github.com). If you want to edit website at github, do it as following gif or clone forked repository. `git clone git@github.com:github_username/Jalpc.git`.
+### 문제 설명
+Y와 S로 구성된 자리 배치도가 주어진다. 이 중 서로 연결된(상하좌우로) 7명을 선택해서 4명 이상이 S인 경우를 구하려 한다. 총 가짓수는?
 
-	<!-- ![edit]({{ site.img_path }}/3steps/edit.gif) -->
-	<img src="{{ site.img_path }}/3steps/edit.gif" width="75%">
+---
 
-2. Enter into repository directory and edit following file list:
+### 코드
+```JAVA
+package baekjoon.Gold;
 
-	* **_config.yml**: edit 'Website settings', 'author', 'comment' and 'analytics' items.
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Queue;
+import java.util.StringTokenizer;
 
-	* **_data/landing.yml**: custom sections of index page.
+/*
+@author 정여민
+@since 2023. 10. 5.
+@see https://www.acmicpc.net/problem/1941
+@git
+@youtube
+@performance
+@category #
+@note 
+*	<문제>
+*	7명의 여학생으로 구성
+*	7명의 자리는 가로나 세로로 반드시 인접 (상하좌우 탐색을 돌리자)
+*	반드시 이다솜파일 필요는 없음(S 이다솜, Y 임도연)
+*	단, 7명 중 4명 이상은 이다솜 파여야함!
+*	소문난 칠공주를 결성할 수 있는 모든 경우의 수 구하기
+*
+*	<입력>
+*	S(이다솜파), Y(임도연파)를 값으로 갖는 5*5 행렬이 공백 없이 첫째줄부터 다섯줄게 걸쳐 주어짐
+*
+*	<출력>
+*	소문난 칠공주를 결성할 수 있는 모든 경우의 수 출력
+*
+*	<풀이>
+*	1. bfs를 돌면서 7명을 선택하고 이들 중 이다솜 파가 몇명인지 세기 -> 망함 
+*	2. 조합으로 7자리를 구한 후에 이들을 탐색하자...
+*
+*
+*/
 
-	* **_data/index/**: edit sections' data to yours at index page, please notice comment at each file.
+public class TestA_BJ_1941_소문난칠공주 {
 
-	* **_data/blog.yml**: edit navbar(categories) of blog page, if you have different/more blog page, copy `blog/python.html` and change it to your category HTML file, and edit **Python**, **/python/** to your category name at items **title** and **permalink**, make sure title is the same as permalink but capitalized first letter(except HTML).
+	static char [][] map = new char[5][5];	// 자리 입력 받음 
+	
+	static int choosed [] = new int [7];
+	static boolean [] visited = new boolean[7];	// 선택한 7자리에 대한 방문처리 
+	
+	static int result;	// 결과 저장
+	
+	static int [] dx = {-1, 1, 0, 0};
+	static int [] dy = {0, 0, -1, 1};
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		
+		for(int i = 0; i < 5; i++) {
+			map[i] = br.readLine().toCharArray();
+		}
+		
+		combination(0, 0, choosed, 0);
+		
+		System.out.println(result);		
+	}
+	
+	private static void combination(int nth, int startIndex, int [] choosed, int DoyeonCnt) {
+		
+		// 임도연 파가 더 많으면 리턴
+		if(DoyeonCnt > 3 ) return;
+		
+		// 7자리 선택
+		if(nth == 7) {
+			visited = new boolean [7];
+			bfs(choosed[0]/5, choosed[0]%5, visited);	// 가장 처음 선택된 것부터 넘겨줘서 탐색 시작
+			return;
+		}
+		
+		for(int i = startIndex; i < 25 ; i++) {	// 25칸 중에 7칸 선택할 것
+			choosed[nth] = i;
+			combination(nth+1, i+1, choosed, (map[i/5][i%5] == 'Y') ? DoyeonCnt+1 : DoyeonCnt);
+		}
+		
+	}
 
-	* **CNAME**: If you wanna release website at your own domain name: edit it and create `gh-pages` branch; if you want to use *github_username.github.io*: leave it blank.
+	private static void bfs(int x, int y, boolean [] visited) {
+		Queue<point> que = new ArrayDeque<>();
+		
+		que.offer(new point(x, y)); // 가장 처음을 큐에 넣어줌
+		visited[0] = true; // 가장 처음은 방문했어
+		int num = 1; // 몇명인지 셀거야 : 처음 큐에 하나 넣었으니 1로 시작해야해! 
+		
+		while(!que.isEmpty()) {	// 큐가 비어있지 않운 동안 셀 건데
+			point current = que.poll();	// 큐에서 원소 꺼내서
+			
+			// 사방 탐색 시작
+			for(int d = 0; d<4; d++) {
+				int nx = current.x + dx[d];
+				int ny = current.y + dy[d];
+				
+				if(isIn(nx, ny)) {	//  자리 배치도 안에 있는 것만 탐색
+					int nxt = nx * 5 + ny;	// choosed 배열에 든 것과 체크하려고
+					for(int i = 0; i < 7; i++) {	// choosed 배열에 있는 7자리 중에
+						if(!visited[i] && choosed[i] == nxt) {	// 연결된 자리가 있는지 탐색
+							visited[i] = true;
+							num++;	// 사람 수 늘려주기
+							que.offer(new point(nx, ny));
+							break; // 이 탐색에서 찾았으면 다음 탐색으로 넘기기 이래도 되나? 암튼
+						}
+					}
+				}
+			}
+		}
+		// 모든 탐색이 끝났을 때 사람수가 7이면 결과+1
+		if(num == 7) result++; 
+	}
 
-	* Go to repo's settings panel, config **GitHub Pages** section to make sure website is released.
+	private static class point{
+		int x, y;
 
-3. Push changes to your github repository and view your website, done!
+		public point(int x, int y) {
+			super();
+			this.x = x;
+			this.y = y;
+		}
 
-From now on, you can post your blog to this website by creating md files at `post/` directory and push it to GitHub, you can clear files at this directory before you post blogs.
+		@Override
+		public String toString() {
+			return "point [x=" + x + ", y=" + y + "]";
+		}
+	}
+	
+	private static boolean isIn(int nx, int ny) {
+		return nx>=0 && nx <5 && ny >=0 && ny<5;
+	}
 
-If you like this repository, I appreciate you star this repository. Please don't hesitate to mail me or post issues on GitHub if you have any questions. Hope you have a happy blog time!😊
+
+}
+
+```
+
+---
+### 풀이
+- 처음에 BFS로 자리를 탐색해서 7명을 고르고 이들 중 이다솜 파가 몇 명인지 세는 방법으로 풀었는데, 이 경우 BFS로 선택한 자리들의 결과를 계속 기억하고 있어야 하는 문제가 있었다. 시간초과도 나고.
+- 찾아보니까 조합으로 먼저 7자리를 구한 후에 이들이 연결되어있는지 탐색하는 방법으로 하는 게 낫다고 해서 그 방법으로 풀이
+1. combination으로 5*5 자리에서 7자리를 고른다
+    1. 2차원 배열의 조합은 좀 까다로운데, 이를 1차원으로 생각하면 좀 더 편하다
+        1. 25칸을 조합을 돌리면서 행(index/5), 열(index%5)로 표현할 수 있음!
+    2. 이때, 가지치기를 하여 시간을 단축시킨다
+        1. 조합을 선택할 때 이다솜 파가 몇명인지 세어주어 같이 정보를 넘기고, 이다솜 파가 열세이면 (전체 횟수 - 이다솜 > 3 이면 임도연파가 4 이상이라는 것이므로) return해준다
+2. 7자리 선정이 끝났으면 bfs로 사방탐색을 해서 7개 자리의 연결 여부를 체크한다.
+    1. 가장 처음에 que에 들어가는 것은 선택된 7자리 중 가장 첫번째에 있는 것이므로 visited[0]을 방문처리 해준다
+    2. 또한 몇 명이 연결되어있는지 셀 변수 num을 사용한다
+    3. 큐가 비어있지 않으면 사방탐색을 시작하는데, 다음 값이 범위 안에 있는지 체크하고, 
+        1. choosed 배열(선택된 자리)에 있는 값인지 확인하는 과정을 거친다
+            1. choosed 배열의 크기가 7밖에 안 되므로 매번 전체를 돌면서 방문하지 않은 곳인데, 연결된 자리면 방문처리 후 큐에 넣는다. 또한 num + 1을 해준다
+    4. 큐가 전부 비었을 때  num이 7이면, 이다솜파가 4명 이상이고 7명의 자리가 연결된 것이므로 결과(result)에 1을 더해준다.
