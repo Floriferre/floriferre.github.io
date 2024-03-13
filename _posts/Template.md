@@ -6,7 +6,7 @@ desc: ""
 keywords: ""
 categories: []
 tags: [Java]
-icon: icon-html
+icon: icon-java
 ---
 
 ### 문제 링크
