@@ -11,16 +11,16 @@ img_path: /static/assets/img/blog  # url should be '/homepage/static/assets/img/
 
 # author -- index page "about me" section
 author:  # change following line to your infomation.
-  name: GitHub  # Be used at blog posts' author.
-  first_name: Hub  # Be used at index page about me section.
-  last_name: Git  # Be used at index page about me section.
+  name: Yeomin Jeong  # Be used at blog posts' author.
+  first_name: Yeomin  # Be used at index page about me section.
+  last_name: Jeong  # Be used at index page about me section.
   avatar: /static/assets/img/landing/avatar.jpg  # upload your avatar at directory and edit it.
   github_username: floriferre  # Leave blank if you don't have now
   linkedin_id:  # Leave blank if you don't have now
   facebook_username:   # Leave blank if you don't have now
   twitter_username:  # Leave blank if you don't have now
   email: jun1778@naver.com  # Leave blank if you don't have now
-  cv: http://cv.jarrekk.com  # An online CV can be printed as PDF, leave blank if you don't have now
+  cv: https://file.notion.so/f/f/96844e94-efc8-4d60-a08f-52b64711faf7/dded5880-2217-4480-a358-eb7abd22a3ef/%EC%A0%95%EC%97%AC%EB%AF%BC_%EC%9D%B4%EB%A0%A5%EC%84%9C.pdf?id=c837f459-71f8-4545-999c-5ad26ba2c30f&table=block&spaceId=96844e94-efc8-4d60-a08f-52b64711faf7&expirationTimestamp=1710396000000&signature=dnnwlIWtjdn65L6UvVALUcBKrtzfGNn5n0XumeE-yjE&downloadName=%EC%A0%95%EC%97%AC%EB%AF%BC_%EC%9D%B4%EB%A0%A5%EC%84%9C.pdf  # An online CV can be printed as PDF, leave blank if you don't have now
   # skill icons are on avatar's left and right side. Reference urls are http://fontawesome.io/ and http://fizzed.com/oss/font-mfizz
   skill_icon1:
     - name: icon-apache
